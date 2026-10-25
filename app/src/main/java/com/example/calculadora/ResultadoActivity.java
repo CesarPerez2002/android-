@@ -21,10 +21,11 @@ public class ResultadoActivity extends AppCompatActivity {
 
         if (resultado != null) {
             String detalle;
-            if ("cos".equalsIgnoreCase(resultado.getOperacion())) {
-                detalle = "Operación: cos(" + resultado.getNumero1() + "°)";
+            String op = resultado.getOperacion();
+            if ("sen".equalsIgnoreCase(op) || "cos".equalsIgnoreCase(op)) {
+                detalle = "Operación: " + op + "(" + resultado.getNumero1() + "°)";
             } else {
-                detalle = "Operación: " + resultado.getNumero1() + " " + resultado.getOperacion() + " " + resultado.getNumero2();
+                detalle = "Operación: " + resultado.getNumero1() + " " + op + " " + resultado.getNumero2();
             }
             tvDetalleOperacion.setText(detalle);
             tvValorResultado.setText(String.valueOf(resultado.getResultado()));

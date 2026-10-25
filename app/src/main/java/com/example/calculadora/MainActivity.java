@@ -24,12 +24,14 @@ public class MainActivity extends AppCompatActivity {
         Button btnRestar = findViewById(R.id.btnRestar);
         Button btnMultiplicar = findViewById(R.id.btnMultiplicar);
         Button btnDividir = findViewById(R.id.btnDividir);
+        Button btnSeno = findViewById(R.id.btnSeno);
         Button btnCoseno = findViewById(R.id.btnCoseno);
 
         btnSumar.setOnClickListener(v -> calcular("+"));
         btnRestar.setOnClickListener(v -> calcular("-"));
         btnMultiplicar.setOnClickListener(v -> calcular("×"));
         btnDividir.setOnClickListener(v -> calcular("÷"));
+        btnSeno.setOnClickListener(v -> calcular("sen"));
         btnCoseno.setOnClickListener(v -> calcular("cos"));
     }
 
@@ -52,9 +54,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         double num2 = 0;
+        boolean esTrigonometrica = operacion.equals("sen") || operacion.equals("cos");
 
-        // Para las operaciones binarias (+, -, ×, ÷) se valida también el segundo número
-        if (!operacion.equals("cos")) {
+        // Para operaciones binarias (+, -, ×, ÷) se valida el segundo campo
+        if (!esTrigonometrica) {
             if (texto2.isEmpty()) {
                 etNumero2.setError("Ingrese el segundo número");
                 etNumero2.requestFocus();
@@ -90,8 +93,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 resultado = num1 / num2;
                 break;
+            case "sen":
+                resultado = Math.sin(Math.toRadians(num1));
+                break;
             case "cos":
-                // Se calcula el coseno asumiendo que el ángulo ingresado está en grados
                 resultado = Math.cos(Math.toRadians(num1));
                 break;
         }
